@@ -1,0 +1,237 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Der Persönlichkeitstest für Shopper</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+    :root {
+      --btn-bg: #3b82f6;
+      --btn-bg-hover: #2563eb;
+      --btn-text: #fff;
+      --card-radius: 12px;
+      --shadow: 0 4px 8px rgba(0,0,0,0.1);
+      --bg-light: #f9fafb;
+      --input-border: #d1d5db;
+      --input-focus: #3b82f6;
+      --green-bg: #d1fae5;
+      --green-text: #065f46;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      color: #111827;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 480px;
+      width: 100%;
+      background: white;
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      padding: 24px 28px 36px;
+      display: flex;
+      flex-direction: column;
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-weight: 700;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+    p.subtitle {
+      margin: 0 0 24px 0;
+      font-weight: 500;
+      color: #6b7280;
+      text-align: center;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #374151;
+    }
+    .input-group {
+      margin-bottom: 24px;
+    }
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toggle-button {
+      background: #f3f4f6;
+      border: 1.5px solid #d1d5db;
+      border-radius: var(--card-radius);
+      padding: 10px 14px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+      line-height: 1.3;
+    }
+    .toggle-button.selected {
+      background-color: var(--btn-bg);
+      border-color: var(--btn-bg);
+      color: var(--btn-text);
+    }
+    button#submit-btn {
+      width: 100%;
+      background-color: var(--btn-bg);
+      border: none;
+      color: var(--btn-text);
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 14px 0;
+      border-radius: var(--card-radius);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: background-color 0.3s;
+      margin-top: 8px;
+    }
+    button#submit-btn:hover {
+      background-color: var(--btn-bg-hover);
+    }
+    .result-card {
+      margin-top: 28px;
+      border-radius: var(--card-radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      font-weight: 600;
+      font-size: 1.1rem;
+      user-select: text;
+      white-space: pre-line;
+      background-color: var(--green-bg);
+      color: var(--green-text);
+    }
+    .error-message {
+      color: #b91c1c;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Der Persönlichkeitstest für Shopper</h1>
+    <p class="subtitle">Machen Sie diesen kurzen Test, um Ihren Einkaufsstil zu entdecken!</p>
+
+    <form id="personality-form" novalidate>
+      <div class="input-group">
+        <label>1. Wie oft kaufen Sie online ein?</label>
+        <div class="radio-group" data-name="q1">
+          <div class="toggle-button" data-value="4">Jede Woche (ich kann einfach nicht widerstehen!)</div>
+          <div class="toggle-button" data-value="3">Ein- bis zweimal im Monat</div>
+          <div class="toggle-button" data-value="2">Nur, wenn ich wirklich etwas brauche</div>
+          <div class="toggle-button" data-value="1">Selten, ich bevorzuge Geschäfte</div>
+        </div>
+        <p class="error-message" style="display:none;">Bitte wählen Sie eine Option.</p>
+      </div>
+
+      <div class="input-group">
+        <label>2. Was tun Sie, wenn Sie ein Verkaufsbanner sehen?</label>
+        <div class="radio-group" data-name="q2">
+          <div class="toggle-button" data-value="4">Sofort in den Warenkorb legen (das darf ich mir nicht entgehen lassen)</div>
+          <div class="toggle-button" data-value="3">Zuerst die Preise mit anderen Geschäften vergleichen</div>
+          <div class="toggle-button" data-value="2">Als Lesezeichen speichern und darüber nachdenken</div>
+          <div class="toggle-button" data-value="1">Ignorieren, es sei denn, es handelt sich um etwas, das ich ohnehin schon brauche</div>
+        </div>
+        <p class="error-message" style="display:none;">Bitte wählen Sie eine Option.</p>
+      </div>
+
+      <div class="input-group">
+        <label>3. Nutzen Sie normalerweise Gutscheine oder Aktionscodes?</label>
+        <div class="radio-group" data-name="q3">
+          <div class="toggle-button" data-value="4">Immer! Ich suche sie vor dem Kauf.</div>
+          <div class="toggle-button" data-value="3">Manchmal, wenn ich sie leicht finde.</div>
+          <div class="toggle-button" data-value="2">Selten ... das erscheint mir zu aufwendig.</div>
+          <div class="toggle-button" data-value="1">Nie, das ist mir zu mühsam.</div>
+        </div>
+        <p class="error-message" style="display:none;">Bitte wählen Sie eine Option.</p>
+      </div>
+
+      <div class="input-group">
+        <label>4. Wie entscheiden Sie sich für einen Kauf?</label>
+        <div class="radio-group" data-name="q4">
+          <div class="toggle-button" data-value="4">Basierend auf Trends und Begeisterung</div>
+          <div class="toggle-button" data-value="3">Indem ich Bewertungen lese und Optionen vergleiche</div>
+          <div class="toggle-button" data-value="2">Nachdem ich abgewartet habe, ob ich es immer noch haben möchte</div>
+          <div class="toggle-button" data-value="1">Nur wenn es unbedingt notwendig ist</div>
+        </div>
+        <p class="error-message" style="display:none;">Bitte wählen Sie eine Option.</p>
+      </div>
+
+      <div class="input-group">
+        <label>5. Wie gehen Sie mit Ihrem Budget um?</label>
+        <div class="radio-group" data-name="q5">
+          <div class="toggle-button" data-value="1">Ich habe kein wirkliches Budget, das kläre ich später</div>
+          <div class="toggle-button" data-value="2">Ich verfolge meine Ausgaben nur grob</div>
+          <div class="toggle-button" data-value="3">Ich plane sorgfältig, bevor ich etwas kaufe</div>
+          <div class="toggle-button" data-value="4">Ich halte mich strikt an das, was ich brauche, nicht an das, was ich will</div>
+        </div>
+        <p class="error-message" style="display:none;">Bitte wählen Sie eine Option.</p>
+      </div>
+
+      <button type="submit" id="submit-btn">Quiz Einreichen</button>
+    </form>
+
+    <section id="result-section" style="display:none;">
+      <div id="result-card" class="result-card" tabindex="-1"></div>
+      <button id="recheck-btn" style="margin-top:16px; background:#3b82f6; color:#fff; border:none; border-radius:12px; padding:12px 0; width:100%; font-weight:600; cursor:pointer;">Erneut testen</button>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const form = document.getElementById('personality-form');
+      const resultSection = document.getElementById('result-section');
+      const resultCard = document.getElementById('result-card');
+      const recheckBtn = document.getElementById('recheck-btn');
+
+      // Get all groups
+      const groups = [...document.querySelectorAll('.radio-group')];
+
+      // Add toggle behavior for buttons
+      groups.forEach(group => {
+        group.querySelectorAll('.toggle-button').forEach(btn => {
+          btn.addEventListener('click', () => {
+            // Deselect others in group
+            group.querySelectorAll('.toggle-button').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            // Hide error
+            group.nextElementSibling.style.display = 'none';
+          });
+        });
+      });
+
+      function validate() {
+        let valid = true;
+        groups.forEach(group => {
+          const selected = group.querySelector('.toggle-button.selected');
+          const errorMsg = group.nextElementSibling;
+          if (!selected) {
+            errorMsg.style.display = 'block';
+            valid = false;
+          }
+        });
+        return valid;
+      }
+
+      function calculateResult() {
+        // We'll use scoring: sum all selected values
+        // Higher score means more careful/planned shopper
+        let score = 0;
+        groups.forEach(group => {
+          const selected
+```
